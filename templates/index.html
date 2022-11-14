@@ -1,0 +1,70 @@
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+
+<body>
+  <h1>WELCOME TO PAKING LOT MANAGEMENT SYSTEM</h1>
+  <br>
+  <h3>Current email: {{email}}</h3>
+  <br>
+  <h3>Lots owned by this account:</h3>
+  <div>
+    {% for i in range(0, len) %}
+    <div>id: {{lots_id[i]}}, addr: {{lots_addr[i]}}, num spots: {{lots_spot_num[i]}}</div>
+    {% endfor %}
+  </div>
+  <br>
+<!-- <p><a href="/another">Go to the other page</a></p> -->
+<br>
+<h2>Adding new parking lot under this account:</h2>
+<form method="POST" action="/add">
+<p>Address of the new parking lot: <input type="text" name="address"> <input type="hidden" name="email" value={{email}}> <input type="submit" value="Add"></p>
+</form>
+
+<br>
+<h2>Adding new violation:</h2>
+<form method="POST" action="/addviolation">
+<p>Spot: <input type="text" name="spot"> Car: <input type="text" name="car"> Amount: <input type="text" name="amount"> <input type="hidden" name="email" value={{email}}> <input type="submit" value="Add"></p>
+</form>
+
+<br>
+<h2>Resolving existing violation:</h2>
+<form method="POST" action="/removeviolation">
+<p>Violation id: <input type="text" name="id"> <input type="hidden" name="email" value={{email}}> <input type="submit" value="Resolve"></p>
+</form>
+
+<br>
+<h2>Car Ownership Lookup:</h2>
+<form method="GET" action="/lookupcar">
+<p>Car plate: <input type="text" name="carplate"> <input type="hidden" name="email" value={{email}}> <input type="submit" value="Look Up"></p>
+</form>
+<div>Owner of {{plate}}: {{owner}}</div>
+
+<br>
+<h2>Transaction Lookup:</h2>
+<form method="GET" action="/lookuptransaction">
+<p>Transaction id: <input type="text" name="id"> <input type="hidden" name="email" value={{email}}> <input type="submit" value="Look Up"></p>
+</form>
+<div>Paid? {{paid}}</div>
+
+<h2>Sign Up</h2>
+
+<form method="POST" action="/signup">
+<p>Email: <input type="text" name="email"> Password: <input type="password" name="password"> Company: <input type="text" name="company"> <input type="submit" value="Sign Up"></p>
+</form>
+
+<h2>Log In</h2>
+
+<form method="GET" action="/login">
+<p>Email: <input type="text" name="email"> Password: <input type="password" name="password"> <input type="submit" value="Login"></p>
+</form>
+
+</body>
+
+
+</html>
